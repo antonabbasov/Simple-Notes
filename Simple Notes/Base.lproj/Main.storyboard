@@ -72,8 +72,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="label" destination="skv-JH-Urb" id="W6q-so-Z0Z"/>
-                        <outlet property="listOfNotes" destination="MIf-QD-iV7" id="y8N-Xr-edU"/>
+                        <outlet property="emptyNotesLabel" destination="skv-JH-Urb" id="W6q-so-Z0Z"/>
+                        <outlet property="listOfNotesTableView" destination="MIf-QD-iV7" id="y8N-Xr-edU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -98,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="-1010" y="-601"/>
         </scene>
-        <!--Entry View Controller-->
+        <!--Entry Note View Controller-->
         <scene sceneID="YUI-bV-EYI">
             <objects>
-                <viewController storyboardIdentifier="new" id="mkU-dY-c4q" customClass="EntryViewController" customModule="Simple_Notes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="new" id="mkU-dY-c4q" customClass="EntryNoteViewController" customModule="Simple_Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TC9-lN-8OY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,8 +135,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="noteField" destination="8Hw-QY-pTv" id="L11-4B-dFr"/>
-                        <outlet property="titleField" destination="1WP-d3-qbA" id="3XA-LK-kdw"/>
+                        <outlet property="noteTextView" destination="8Hw-QY-pTv" id="L11-4B-dFr"/>
+                        <outlet property="titleTextField" destination="1WP-d3-qbA" id="3XA-LK-kdw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySL-6k-mDA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -182,7 +182,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="noteText" destination="06m-YK-mkg" id="tga-U1-ncU"/>
+                        <outlet property="noteTextView" destination="06m-YK-mkg" id="tga-U1-ncU"/>
                         <outlet property="titleLabel" destination="ZQd-AB-FZd" id="wPA-nT-R0d"/>
                     </connections>
                 </viewController>

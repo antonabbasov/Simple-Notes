@@ -8,48 +8,66 @@
 import UIKit
 import CoreData
 
-class NotesViewController: UIViewController {
+final class NotesViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet var listOfNotes: UITableView!
-    @IBOutlet var label: UILabel!
+    @IBOutlet private var listOfNotesTableView: UITableView!
+    @IBOutlet private var emptyNotesLabel: UILabel!
     
     // MARK: - Non private variables
     
     var dbHandler = DBHandler()
     
-    // MARK: - actions
+    // MARK: - Constants
     
-    @IBAction func didTapNewNote() {
-        guard let newNoteViewController = storyboard?.instantiateViewController(identifier: "new") as? EntryViewController else { return }
-        newNoteViewController.title = "New note"
+    private enum Constants {
+        static let newNoteViewControllerIdentifier = "new"
+        static let newNoteViewControllerTitle = "New note"
+        static let notesViewControllerTitle = "Notes"
+        static let notesTableViewCellIdentifier = "cell"
+        static let existingNoteViewControllerIdentifier = "note"
+        static let existingNoteViewControllerTitle = "Note"
+        static let noteEntityAttributeNameTitle = "title"
+        static let noteEntityAttributeNameNoteText = "notetext"
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction private func didTapNewNote() {
+        guard let newNoteViewController = storyboard?.instantiateViewController(identifier: Constants.newNoteViewControllerIdentifier) as? EntryNoteViewController else {
+            return
+        }
+        newNoteViewController.title = Constants.newNoteViewControllerTitle
         newNoteViewController.navigationItem.largeTitleDisplayMode = .never
         newNoteViewController.completion = { noteTitle, note in
             self.navigationController?.popToRootViewController(animated: true)
             self.dbHandler.save(title: noteTitle, noteText: note)
-            self.listOfNotes.reloadData()
+            self.listOfNotesTableView.reloadData()
         }
         navigationController?.pushViewController(newNoteViewController, animated: true)
+    }
+    
+    // MARK: - Instance Methods
+    
+    private func emptyNotesLabelHandling() {
+        if (dbHandler.notes.count == 0) {
+            emptyNotesLabel.isHidden = false
+            listOfNotesTableView.isHidden = true
+        } else {
+            emptyNotesLabel.isHidden = true
+            listOfNotesTableView.isHidden = false
+        }
     }
     
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewWillAppear(true)
-        
-        if (dbHandler.notes.count == 0) {
-            label.isHidden = false
-            listOfNotes.isHidden = true
-        } else {
-            label.isHidden = true
-            listOfNotes.isHidden = false
-        }
-        
-        listOfNotes.delegate = self
-        listOfNotes.dataSource = self
-        title = "Notes"
+        emptyNotesLabelHandling()
+        listOfNotesTableView.delegate = self
+        listOfNotesTableView.dataSource = self
+        title = Constants.notesViewControllerTitle
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,10 +83,10 @@ extension NotesViewController: UITableViewDataSource {
     // MARK: - Instance Methods
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notesTableViewCellIdentifier, for: indexPath)
         let note = dbHandler.notes[indexPath.row]
-        cell.textLabel?.text = note.value(forKeyPath: "title") as? String
-        cell.detailTextLabel?.text = note.value(forKeyPath: "notetext") as? String
+        cell.textLabel?.text = note.value(forKeyPath: Constants.noteEntityAttributeNameTitle) as? String
+        cell.detailTextLabel?.text = note.value(forKeyPath: Constants.noteEntityAttributeNameNoteText) as? String
         
         return cell
     }
@@ -87,14 +105,13 @@ extension NotesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let note = dbHandler.notes[indexPath.row]
-        guard let noteViewController = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else { return }
+        guard let noteViewController = storyboard?.instantiateViewController(identifier: Constants.existingNoteViewControllerIdentifier) as? NoteViewController else {
+            return
+        }
         noteViewController.navigationItem.largeTitleDisplayMode = .never
-        noteViewController.title = "Note"
-        noteViewController.noteTitle = note.value(forKeyPath: "title") as? String ?? ""
-        noteViewController.note = note.value(forKeyPath: "notetext") as? String ?? ""
+        noteViewController.title = Constants.existingNoteViewControllerTitle
+        noteViewController.noteTitle = note.value(forKeyPath: Constants.noteEntityAttributeNameTitle) as? String ?? ""
+        noteViewController.note = note.value(forKeyPath: Constants.noteEntityAttributeNameNoteText) as? String ?? ""
         navigationController?.pushViewController(noteViewController, animated: true)
     }
 }
-
-
-

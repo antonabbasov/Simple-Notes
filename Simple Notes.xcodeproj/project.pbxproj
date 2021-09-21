@@ -14,7 +14,7 @@
 		069C561326F247BB00716845 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 069C561226F247BB00716845 /* Assets.xcassets */; };
 		069C561626F247BB00716845 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 069C561426F247BB00716845 /* LaunchScreen.storyboard */; };
 		069C562226F24B2000716845 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069C562126F24B2000716845 /* NoteViewController.swift */; };
-		069C562426F24B3900716845 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069C562326F24B3900716845 /* EntryViewController.swift */; };
+		069C562426F24B3900716845 /* EntryNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069C562326F24B3900716845 /* EntryNoteViewController.swift */; };
 		069C562726F4D2B900716845 /* NoteModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 069C562526F4D2B900716845 /* NoteModel.xcdatamodeld */; };
 		06C3AED326F8AC4F00C1BB6D /* DBHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C3AED226F8AC4F00C1BB6D /* DBHandler.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +29,7 @@
 		069C561526F247BB00716845 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		069C561726F247BB00716845 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		069C562126F24B2000716845 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
-		069C562326F24B3900716845 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		069C562326F24B3900716845 /* EntryNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryNoteViewController.swift; sourceTree = "<group>"; };
 		069C562626F4D2B900716845 /* NoteModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteModel.xcdatamodel; sourceTree = "<group>"; };
 		06C3AED226F8AC4F00C1BB6D /* DBHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				069C562126F24B2000716845 /* NoteViewController.swift */,
-				069C562326F24B3900716845 /* EntryViewController.swift */,
+				069C562326F24B3900716845 /* EntryNoteViewController.swift */,
 				069C560D26F247B900716845 /* NotesViewController.swift */,
 			);
 			path = "View Controllers";
@@ -178,7 +178,7 @@
 				069C560A26F247B900716845 /* AppDelegate.swift in Sources */,
 				069C560C26F247B900716845 /* SceneDelegate.swift in Sources */,
 				069C562226F24B2000716845 /* NoteViewController.swift in Sources */,
-				069C562426F24B3900716845 /* EntryViewController.swift in Sources */,
+				069C562426F24B3900716845 /* EntryNoteViewController.swift in Sources */,
 				069C562726F4D2B900716845 /* NoteModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,23 +7,23 @@
 
 import UIKit
 
-class NoteViewController: UIViewController {
+final class NoteViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var noteText: UITextView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var noteTextView: UITextView!
     
-    // MARK: - Non private variables
+    // MARK: - Variables
     
-    public var noteTitle: String = ""
-    public var note: String = ""
+    var noteTitle: String = ""
+    var note: String = ""
     
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = noteTitle
-        noteText.text = note
+        noteTextView.text = note
     }
 }

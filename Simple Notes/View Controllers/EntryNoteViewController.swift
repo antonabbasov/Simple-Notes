@@ -7,12 +7,12 @@
 
 import UIKit
 
-class EntryViewController: UIViewController {
+final class EntryNoteViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet var titleField: UITextField!
-    @IBOutlet var noteField: UITextView!
+    @IBOutlet var titleTextField: UITextField!
+    @IBOutlet var noteTextView: UITextView!
     
     // MARK: - Non private variables
     
@@ -20,9 +20,9 @@ class EntryViewController: UIViewController {
     
     // MARK: - Instance Methods
     
-    @objc func didTapSave() {
-        if let text = titleField.text, !text.isEmpty, !noteField.text.isEmpty {
-            completion?(text, noteField.text)
+    @objc private func didTapSave() {
+        if let text = titleTextField.text, !text.isEmpty, !noteTextView.text.isEmpty {
+            completion?(text, noteTextView.text)
         }
     }
     
@@ -30,7 +30,7 @@ class EntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleField.becomeFirstResponder()
+        titleTextField.becomeFirstResponder()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
     }
 }
