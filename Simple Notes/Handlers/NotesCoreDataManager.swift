@@ -24,14 +24,10 @@ class NotesCoreDataManager {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         
-        guard let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedContext) else {
-            return
-        }
+        let note = Note(context: managedContext)
         
-        let note = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        note.setValue(title, forKeyPath: "title")
-        note.setValue(noteText, forKeyPath: "notetext")
+        note.title = title
+        note.notetext = noteText
         
         do {
             try managedContext.save()

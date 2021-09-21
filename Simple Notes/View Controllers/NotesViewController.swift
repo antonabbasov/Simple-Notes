@@ -17,7 +17,7 @@ final class NotesViewController: UIViewController {
     
     // MARK: - Non private variables
     
-    var dbHandler = NotesCoreDataManager()
+    var notesCoreDataManager = NotesCoreDataManager()
     
     // MARK: - Constants
     
@@ -42,7 +42,7 @@ final class NotesViewController: UIViewController {
         newNoteViewController.navigationItem.largeTitleDisplayMode = .never
         newNoteViewController.completion = { noteTitle, note in
             self.navigationController?.popToRootViewController(animated: true)
-            self.dbHandler.save(title: noteTitle, noteText: note)
+            self.notesCoreDataManager.save(title: noteTitle, noteText: note)
             self.listOfNotesTableView.reloadData()
         }
         navigationController?.pushViewController(newNoteViewController, animated: true)
@@ -51,7 +51,7 @@ final class NotesViewController: UIViewController {
     // MARK: - Instance Methods
     
     private func emptyNotesLabelHandling() {
-        if (dbHandler.notes.isEmpty) {
+        if (notesCoreDataManager.notes.isEmpty) {
             emptyNotesLabel.isHidden = false
             listOfNotesTableView.isHidden = true
         } else {
@@ -72,7 +72,7 @@ final class NotesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dbHandler.fetch()
+        notesCoreDataManager.fetch()
     }
 }
 
@@ -83,12 +83,12 @@ extension NotesViewController: UITableViewDataSource {
     // MARK: - Instance Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dbHandler.notes.count
+        return notesCoreDataManager.notes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notesTableViewCellIdentifier, for: indexPath)
-        let note = dbHandler.notes[indexPath.row]
+        let note = notesCoreDataManager.notes[indexPath.row]
         cell.textLabel?.text = note.value(forKeyPath: Constants.noteEntityAttributeNameTitle) as? String
         cell.detailTextLabel?.text = note.value(forKeyPath: Constants.noteEntityAttributeNameNoteText) as? String
         
@@ -104,7 +104,7 @@ extension NotesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let note = dbHandler.notes[indexPath.row]
+        let note = notesCoreDataManager.notes[indexPath.row]
         guard let noteViewController = storyboard?.instantiateViewController(identifier: Constants.existingNoteViewControllerIdentifier) as? NoteViewController else {
             return
         }
