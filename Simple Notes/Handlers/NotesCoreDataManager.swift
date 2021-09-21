@@ -8,14 +8,13 @@
 import UIKit
 import CoreData
 
-
-/// Data base handler
-class DBHandler {
+/// Note data base manager
+class NotesCoreDataManager {
     
     // MARK: - Non private variables
     
     var notes: [NSManagedObject] = []
-    
+        
     // MARK: - Instance Methods
     
     func save(title: String, noteText: String) {

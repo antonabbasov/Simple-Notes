@@ -17,7 +17,7 @@ final class NotesViewController: UIViewController {
     
     // MARK: - Non private variables
     
-    var dbHandler = DBHandler()
+    var dbHandler = NotesCoreDataManager()
     
     // MARK: - Constants
     
@@ -51,7 +51,7 @@ final class NotesViewController: UIViewController {
     // MARK: - Instance Methods
     
     private func emptyNotesLabelHandling() {
-        if (dbHandler.notes.count == 0) {
+        if (dbHandler.notes.isEmpty) {
             emptyNotesLabel.isHidden = false
             listOfNotesTableView.isHidden = true
         } else {
@@ -82,6 +82,10 @@ extension NotesViewController: UITableViewDataSource {
     
     // MARK: - Instance Methods
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dbHandler.notes.count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notesTableViewCellIdentifier, for: indexPath)
         let note = dbHandler.notes[indexPath.row]
@@ -97,10 +101,6 @@ extension NotesViewController: UITableViewDataSource {
 extension NotesViewController: UITableViewDelegate {
     
     // MARK: - Instance Methods
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dbHandler.notes.count
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

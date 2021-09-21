@@ -16,7 +16,7 @@ final class EntryNoteViewController: UIViewController {
     
     // MARK: - Non private variables
     
-    public var completion: ((String, String) -> Void)?
+    var completion: ((String, String) -> Void)?
     
     // MARK: - Instance Methods
     
